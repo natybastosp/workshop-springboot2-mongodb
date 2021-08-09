@@ -1,5 +1,6 @@
 package com.natybastos.workshopmong2.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,8 +25,13 @@ public class PostService {
 		Optional<Post> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundExeption("Objeto não encontrado"));
 	}
-	
+		
 	public List<Post> findByTitle(String text) {
 		return repo.searchTitle(text);
+	}
+	
+	public List<Post> fullSearch(String texte, Date minDate, Date maxdate){
+		maxdate = new Date(maxdate.getTime() + 24*60*1000);
+		return repo.fullSearche(texte, minDate, maxdate);
 	}
 }
